@@ -1,4 +1,4 @@
-#include <LCD8x2.h>
+#include <LCD16d2.h>
 
 void setup() {
   pinMode(12,OUTPUT);
