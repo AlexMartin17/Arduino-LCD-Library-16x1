@@ -88,8 +88,8 @@ void Write_Char(char a)
    delay(4);
    digitalWrite(11,LOW);
 }
-
-void Write_String(char *a)
+// If the display is 16x1 but second 8 characters are new on new line (most of the chinese displays)
+void Write_String8x2(char *a)
 {
 	int i;
 	for(i=0;a[i]!='\0';i++) {
@@ -109,7 +109,16 @@ void Write_String(char *a)
         
     }
 }
-
+// If the display is regular 16x1
+void Write_String(char *a)
+{
+	int i;
+	for(i=0;a[i]!='\0';i++) {
+      
+        Write_Char(a[i]);
+        
+    }
+}
 void Shift_Right()
 {
 	Cmd(0x1C);

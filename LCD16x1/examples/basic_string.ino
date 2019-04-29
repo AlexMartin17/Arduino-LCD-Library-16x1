@@ -1,4 +1,4 @@
-#include <LCD16d2.h>
+#include <LCD16x1.h>
 
 void setup() {
   pinMode(12,OUTPUT);
@@ -12,7 +12,8 @@ void setup() {
   pinMode(6,OUTPUT);
   pinMode(7,OUTPUT);
   Init();
-  Write_String("Bigger than 8ddd");
+  //Write_String8x2("0123456789ABCDEF"); // In case of chinese display
+  Write_String("0123456789ABCDEF");
 }
 
 void loop() {

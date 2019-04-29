@@ -1,6 +1,6 @@
 # Arduino LCD Library 16x1/2
 I recently found an character LCD display which was 16x1. But the strangest thing was that those 16 cols was divided by 2 a.k.a splited by half 8+8.
-So the default library couldn't work and i decided to make my own.
+So the default library couldn't work and i decided to make my own. In this library there are 2 separate functions for writing strings e.g for regular 16x1 and chinese 16x1 split to 2x8 columns in 1 row.
 
 Wiring:
 
