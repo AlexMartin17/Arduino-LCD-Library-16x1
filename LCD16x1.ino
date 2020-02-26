@@ -7,7 +7,7 @@ void setup() {
   pinMode(12,OUTPUT);
   pinMode(11,OUTPUT);
   Init();
-  Write_String("Bigger than 8...");
+  Write_String("0123456789ABCDEF");
 }
 
 void loop() {
