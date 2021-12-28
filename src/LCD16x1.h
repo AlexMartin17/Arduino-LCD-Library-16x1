@@ -1,52 +1,52 @@
 void Port(char a)
 {
 	if(a & 1)
-		digitalWrite(0,HIGH);
-	else 
-		digitalWrite(0,LOW);
-	
+		digitalWrite(data_pin_0,HIGH);
+	else
+		digitalWrite(data_pin_0,LOW);
+
 	if(a & 2)
-		digitalWrite(1,HIGH);
+		digitalWrite(data_pin_1,HIGH);
 	else
-		digitalWrite(1,LOW);
-	
+		digitalWrite(data_pin_1,LOW);
+
 	if(a & 4)
-		digitalWrite(2,HIGH);
+		digitalWrite(data_pin_2,HIGH);
 	else
-		digitalWrite(2,LOW);
-	
+		digitalWrite(data_pin_2,LOW);
+
 	if(a & 8)
-		digitalWrite(3,HIGH);
+		digitalWrite(data_pin_3,HIGH);
 	else
-		digitalWrite(3,LOW);
-	
+		digitalWrite(data_pin_3,LOW);
+
 	if(a & 16)
-		digitalWrite(4,HIGH);
+		digitalWrite(data_pin_4,HIGH);
 	else
-		digitalWrite(4,LOW);
+		digitalWrite(data_pin_4,LOW);
 
 	if(a & 32)
-		digitalWrite(5,HIGH);
+		digitalWrite(data_pin_5,HIGH);
 	else
-		digitalWrite(5,LOW);
-	
+		digitalWrite(data_pin_5,LOW);
+
 	if(a & 64)
-		digitalWrite(6,HIGH);
-	else 
-		digitalWrite(6,LOW);
-	
-	if(a & 128)
-		digitalWrite(7,HIGH);
+		digitalWrite(data_pin_6,HIGH);
 	else
-		digitalWrite(7,LOW);
+		digitalWrite(data_pin_6,LOW);
+
+	if(a & 128)
+		digitalWrite(data_pin_7,HIGH);
+	else
+		digitalWrite(data_pin_7,LOW);
 }
 void Cmd(char a)
-{ 
-  digitalWrite(12,LOW);            
-  Port(a);             
-  digitalWrite(11,HIGH);             
+{
+  digitalWrite(rs_pin,LOW);
+  Port(a);
+  digitalWrite(en_pin,HIGH);
   delay(5);
-  digitalWrite(11,LOW);           
+  digitalWrite(en_pin,LOW);
 }
 
 void Clear_Display()
@@ -55,7 +55,7 @@ void Clear_Display()
 }
 // Sets the cursor at the begining
 void Set_Cursor1() {
-    
+
     Cmd(0x80);
 }
 // Sets the cursor after first 8 chars
@@ -67,7 +67,7 @@ void Set_Cursor2()
 void Init()
 {
   Port(0x00);
-  digitalWrite(12,LOW);
+  digitalWrite(rs_pin,LOW);
   delay(25);
   Cmd(0x30);
   delay(5);
@@ -77,18 +77,18 @@ void Init()
   Cmd(0x38);
   Cmd(0x0C);
   Cmd(0x01);
-  Cmd(0x06); 
+  Cmd(0x06);
 }
 
 void Write_Char(char a)
 {
-   digitalWrite(12,HIGH);
+   digitalWrite(rs_pin,HIGH);
    Port(a);
-   digitalWrite(11,HIGH);
+   digitalWrite(en_pin,HIGH);
    delay(4);
-   digitalWrite(11,LOW);
+   digitalWrite(en_pin,LOW);
 }
-// If the display is 16x1 but second 8 characters are new on new line (most of the chinese displays)
+// If the display is 16x1 but the second 8 characters are on new line (most of the chinese displays)
 void Write_String8x2(char *a)
 {
 	int i;
@@ -106,7 +106,7 @@ void Write_String8x2(char *a)
         } else {
             Write_Char(a[i]);
         }
-        
+
     }
 }
 // If the display is regular 16x1
@@ -114,9 +114,9 @@ void Write_String(char *a)
 {
 	int i;
 	for(i=0;a[i]!='\0';i++) {
-      
+
         Write_Char(a[i]);
-        
+
     }
 }
 void Shift_Right()
