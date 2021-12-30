@@ -1,52 +1,52 @@
 void Port(char a)
 {
 	if(a & 1)
-		digitalWrite(data_pin_0,HIGH);
+		digitalWrite(0,HIGH);
 	else
-		digitalWrite(data_pin_0,LOW);
+		digitalWrite(0,LOW);
 
 	if(a & 2)
-		digitalWrite(data_pin_1,HIGH);
+		digitalWrite(1,HIGH);
 	else
-		digitalWrite(data_pin_1,LOW);
+		digitalWrite(1,LOW);
 
 	if(a & 4)
-		digitalWrite(data_pin_2,HIGH);
+		digitalWrite(2,HIGH);
 	else
-		digitalWrite(data_pin_2,LOW);
+		digitalWrite(2,LOW);
 
 	if(a & 8)
-		digitalWrite(data_pin_3,HIGH);
+		digitalWrite(3,HIGH);
 	else
-		digitalWrite(data_pin_3,LOW);
+		digitalWrite(3,LOW);
 
 	if(a & 16)
-		digitalWrite(data_pin_4,HIGH);
+		digitalWrite(4,HIGH);
 	else
-		digitalWrite(data_pin_4,LOW);
+		digitalWrite(4,LOW);
 
 	if(a & 32)
-		digitalWrite(data_pin_5,HIGH);
+		digitalWrite(5,HIGH);
 	else
-		digitalWrite(data_pin_5,LOW);
+		digitalWrite(5,LOW);
 
 	if(a & 64)
-		digitalWrite(data_pin_6,HIGH);
+		digitalWrite(6,HIGH);
 	else
-		digitalWrite(data_pin_6,LOW);
+		digitalWrite(6,LOW);
 
 	if(a & 128)
-		digitalWrite(data_pin_7,HIGH);
+		digitalWrite(7,HIGH);
 	else
-		digitalWrite(data_pin_7,LOW);
+		digitalWrite(7,LOW);
 }
 void Cmd(char a)
 {
-  digitalWrite(rs_pin,LOW);
+  digitalWrite(12,LOW);
   Port(a);
-  digitalWrite(en_pin,HIGH);
+  digitalWrite(11,HIGH);
   delay(5);
-  digitalWrite(en_pin,LOW);
+  digitalWrite(11,LOW);
 }
 
 void Clear_Display()
@@ -67,7 +67,7 @@ void Set_Cursor2()
 void Init()
 {
   Port(0x00);
-  digitalWrite(rs_pin,LOW);
+  digitalWrite(12,LOW);
   delay(25);
   Cmd(0x30);
   delay(5);
@@ -82,11 +82,11 @@ void Init()
 
 void Write_Char(char a)
 {
-   digitalWrite(rs_pin,HIGH);
+   digitalWrite(12,HIGH);
    Port(a);
-   digitalWrite(en_pin,HIGH);
+   digitalWrite(11,HIGH);
    delay(4);
-   digitalWrite(en_pin,LOW);
+   digitalWrite(11,LOW);
 }
 // If the display is 16x1 but the second 8 characters are on new line (most of the chinese displays)
 void Write_String8x2(char *a)
